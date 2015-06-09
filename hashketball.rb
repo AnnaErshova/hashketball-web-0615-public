@@ -123,18 +123,17 @@ end
 # .each_key
 # or tie to player_stats
 def num_points_scored(name)
-    # new_hash = {}
-    points_scored = nil
-    game_hash.each do |home_or_away, team_details|
-        team_details[:players].each do |one_hash|  # one_hash is an array
-            one_hash.each do |key1,value1|
-                if one_hash.has_value? (name)
-                    points_scored = one_hash[:points]
-                end
-            end
+  points_scored = nil
+  game_hash.each do |home_or_away, team_details|
+    team_details[:players].each do |one_hash|  # one_hash is an array
+      one_hash.each do |key1,value1|
+        if one_hash.has_value? (name)
+          points_scored = one_hash[:points]
         end
+      end
     end
-    points_scored
+  end
+  points_scored
 end
 
 
@@ -187,16 +186,15 @@ def player_numbers(team_name)
   outcome = []
   game_hash.each do |home_or_away, team_details|
     team_details.each do |key,value|
-        if value == team_name
-            game_hash[home_or_away][:players].each do |one_hash|
-                one_hash.each do |key1,value1|
-                    if key1 == :number 
-                        outcome << one_hash[key1]
-                    end
-                end
-            end    
-            # this is array
-        end
+      if value == team_name
+        game_hash[home_or_away][:players].each do |one_hash|
+          one_hash.each do |key1,value1|
+            if key1 == :number 
+              outcome << one_hash[key1]
+            end
+          end
+        end    
+      end
     end
   end
   outcome
@@ -216,40 +214,39 @@ end
 #   }
 
 def player_stats(name)
-    new_hash = {}
-    p_stats = nil
-    game_hash.each do |home_or_away, team_details|
-        team_details[:players].each do |one_hash|  # one_hash is an array
-            one_hash.each do |key,value| #now it is a hash
-                if value == name
-                    new_hash = one_hash.delete_if { |k,v| v == name }
-                end
-            end
+  new_hash = {}
+  p_stats = nil
+  game_hash.each do |home_or_away, team_details|
+    team_details[:players].each do |one_hash|  # one_hash is an array
+      one_hash.each do |key,value| #now it is a hash
+        if value == name
+          new_hash = one_hash.delete_if { |k,v| v == name }
         end
+      end
     end
-    new_hash
+  end
+  new_hash
 end
 
 # Return the number of rebounds for the player with the largest shoe size. 
 def big_shoe_rebounds
-    # new_hash = {}
-    shoe_max = 0
-    rebounds = nil
-    game_hash.each do |home_or_away, team_details|
-        team_details[:players].each do |one_hash|  # one_hash is an array
-            one_hash.each do |key1,value1| #one_hash is a hash now
-                if key1 == :shoe
-                    if value1 > shoe_max
-                        shoe_max = value1 # say this is 18
-                        if value1 == shoe_max
-                            rebounds = one_hash[:rebounds]
-                        end
-                    end
-                end
+  shoe_max = 0
+  rebounds = nil
+  game_hash.each do |home_or_away, team_details|
+    team_details[:players].each do |one_hash|  # one_hash is an array
+      one_hash.each do |key1,value1| #one_hash is a hash now
+        if key1 == :shoe
+          if value1 > shoe_max
+            shoe_max = value1 
+            if value1 == shoe_max
+              rebounds = one_hash[:rebounds]
             end
+          end
         end
+      end
     end
-    rebounds
+  end
+  rebounds
 end
 
 
