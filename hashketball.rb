@@ -215,13 +215,12 @@ end
 #     :slam_dunks => 1
 #   }
 
-# !!!
 def player_stats(name)
     new_hash = {}
     p_stats = nil
     game_hash.each do |home_or_away, team_details|
         team_details[:players].each do |one_hash|  # one_hash is an array
-            one_hash.each do |key,value|
+            one_hash.each do |key,value| #now it is a hash
                 if value == name
                     new_hash = one_hash.delete_if { |k,v| v == name }
                 end
@@ -235,21 +234,46 @@ end
 # Call the method big_shoe_rebounds.
 
 # !!!
+#def big_shoe_rebounds
+#  output = nil
+#  biggest_shoe_size = 0
+#  game_hash.each do |home_or_away, team_details|
+#    team_details[:players].each do |key, value|
+#      if value[:shoe] > biggest_shoe_size 
+#        biggest_shoe_size = value[:shoe]
+#        output = value[:rebounds]
+#      end
+#    end
+#  end
+#  output
+# end
+
+#_____
 def big_shoe_rebounds
-  output = nil
-  biggest_shoe_size = 0
-  game_hash.each do |home_or_away, team_details|
-    team_details[:players].each do |key, value|
-      if value[:shoe] > biggest_shoe_size 
-        biggest_shoe_size = value[:shoe]
-        output = value[:rebounds]
-      end
+    # new_hash = {}
+    shoe_max = 0
+    rebounds = nil
+    game_hash.each do |home_or_away, team_details|
+        team_details[:players].each do |one_hash|  # one_hash is an array
+            one_hash.each do |key1,value1| #one_hash is a hash now
+                if key1 == :shoe
+                    if value1 > shoe_max
+                        shoe_max = value1 # say this is 18
+                        if value1 == shoe_max
+                            rebounds = one_hash[:rebounds]
+                        end
+                    end
+                end
+                #if one_hash.has_value? (name)
+                #    shoe_size = one_hash[:shoe]
+                #end
+            end
+        end
     end
-  end
-  output
+    rebounds
 end
 
-
+big_shoe_rebounds
 
 
 
