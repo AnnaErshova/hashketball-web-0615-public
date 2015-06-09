@@ -231,24 +231,6 @@ def player_stats(name)
 end
 
 # Return the number of rebounds for the player with the largest shoe size. 
-# Call the method big_shoe_rebounds.
-
-# !!!
-#def big_shoe_rebounds
-#  output = nil
-#  biggest_shoe_size = 0
-#  game_hash.each do |home_or_away, team_details|
-#    team_details[:players].each do |key, value|
-#      if value[:shoe] > biggest_shoe_size 
-#        biggest_shoe_size = value[:shoe]
-#        output = value[:rebounds]
-#      end
-#    end
-#  end
-#  output
-# end
-
-#_____
 def big_shoe_rebounds
     # new_hash = {}
     shoe_max = 0
@@ -264,16 +246,12 @@ def big_shoe_rebounds
                         end
                     end
                 end
-                #if one_hash.has_value? (name)
-                #    shoe_size = one_hash[:shoe]
-                #end
             end
         end
     end
     rebounds
 end
 
-big_shoe_rebounds
 
 
 
