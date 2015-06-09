@@ -122,6 +122,7 @@ end
 # Return the number of points scored for any player, given that player's name  ('name') as a string. 
 # .each_key
 # !!!
+# or tie to player_stats
 def num_points_scored(name)
     # new_hash = {}
     points_scored = nil
@@ -141,7 +142,7 @@ end
 # returns shoe size of each player given player name ('name')
 # same method as above for points
 # !!!
-
+# or tie to player_stats method
 def shoe_size(name)
     # new_hash = {}
     shoe_size = nil
@@ -180,22 +181,30 @@ def team_names
   game_hash.collect {|home_or_away, stats| team_name = stats[:team_name].to_s}
 end
 
-# Return all the player numbers for a team, given a team name ('team_name'). Call the method player_numbers.
+# Return all the player jersey numbers for a team, given a team name ('team_name'). Call the method player_numbers.
 # => we want the return hash to be 5 numbers long
 # ...can we check if hash.include? certain key-value pair?
 # this is similar to team_colors and shoe_size, but it seems like it wants a hash returned
 # this wasn't working for me until I used .collect on it. so frustrating
 
+# !!!
 def player_numbers(team_name)
-  outcome = nil
-  game_hash.each do |home_or_away, stats|
-    if team_name == stats[:team_name]
-      outcome = stats[:players].map do |player_name, deets|
-      deets[:number]
-      end
+  # outcome = nil
+  game_hash.each do |home_or_away, team_details|
+    team_details.each do |key,value|
+        if value == team_name
+            game_hash[home_or_away][:players].each do |one_hash|
+                one_hash.each do |key1,value1|
+                    if key1 == :number 
+                        value1 #
+                    end
+                end
+            end    
+            # this is array
+        end
     end
   end
-  outcome
+  # outcome
 end
 
 # Return all the stats for a player, given a player's name ("name") 
@@ -211,6 +220,7 @@ end
 #     :slam_dunks => 1
 #   }
 
+# !!!
 def player_stats(name)
   output = nil
   game_hash.each do |home_or_away, team_details|
@@ -226,6 +236,7 @@ end
 # Return the number of rebounds for the player with the largest shoe size. 
 # Call the method big_shoe_rebounds.
 
+# !!!
 def big_shoe_rebounds
   output = nil
   biggest_shoe_size = 0
