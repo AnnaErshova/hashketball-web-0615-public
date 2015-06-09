@@ -136,35 +136,30 @@ def num_points_scored(name)
   points_scored
 end
 
-
 # returns shoe size of each player given player name ('name')
 # same method as above for points
 # or tie to player_stats method
 def shoe_size(name)
-    # new_hash = {}
-    shoe_size = nil
-    game_hash.each do |home_or_away, team_details|
-        team_details[:players].each do |one_hash|  # one_hash is an array
-            one_hash.each do |key1,value1|
-                if one_hash.has_value? (name)
-                    shoe_size = one_hash[:shoe]
-                end
-            end
+  shoe_size = nil
+  game_hash.each do |home_or_away, team_details|
+    team_details[:players].each do |one_hash|  # one_hash is an array
+      one_hash.each do |key1,value1|
+        if one_hash.has_value? (name)
+          shoe_size = one_hash[:shoe]
         end
+      end
     end
-    shoe_size
+  end
+  shoe_size
 end
 
 # Return both colors for any team, given the team name. Call the method team_colors.
 # this is tricky because we are essentially returning a value of a key if we know a key in the same hash
 # hash => | place => colors
 # alternatively: if team_name = "Brookly Nets", return :colors of :home 
+
 def team_colors(team_name)
-  if game_hash[:home][:team_name] == team_name.to_s
-    team = :home
-  else
-    team = :away # assumes that the only other alternative is the away team; if we had more than 2 teams, we would have to do elseif OR look up by exact string match
-  end
+  (game_hash[:home][:team_name] == team_name.to_s) ? team = :home : team = :away
   game_hash[team][:colors]
 end
 
@@ -173,7 +168,6 @@ end
 # You can just call it from within your team_names method.
 # I kept getting error that the size of my teams was 17, not 2, which means that the entire hash at that level was returned when using .each. 
 # I ended up using .collect because that only returns a modified hash, which is what the test seemed to look for
-
 def team_names
   game_hash.collect {|home_or_away, stats| team_name = stats[:team_name].to_s}
 end
