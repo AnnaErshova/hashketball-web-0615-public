@@ -121,7 +121,6 @@ end
 
 # Return the number of points scored for any player, given that player's name  ('name') as a string. 
 # .each_key
-# !!!
 # or tie to player_stats
 def num_points_scored(name)
     # new_hash = {}
@@ -141,7 +140,6 @@ end
 
 # returns shoe size of each player given player name ('name')
 # same method as above for points
-# !!!
 # or tie to player_stats method
 def shoe_size(name)
     # new_hash = {}
@@ -185,18 +183,15 @@ end
 # => we want the return hash to be 5 numbers long
 # ...can we check if hash.include? certain key-value pair?
 # this is similar to team_colors and shoe_size, but it seems like it wants a hash returned
-# this wasn't working for me until I used .collect on it. so frustrating
-
-# !!!
 def player_numbers(team_name)
-  # outcome = nil
+  outcome = []
   game_hash.each do |home_or_away, team_details|
     team_details.each do |key,value|
         if value == team_name
             game_hash[home_or_away][:players].each do |one_hash|
                 one_hash.each do |key1,value1|
                     if key1 == :number 
-                        value1 #
+                        outcome << one_hash[key1]
                     end
                 end
             end    
@@ -204,7 +199,7 @@ def player_numbers(team_name)
         end
     end
   end
-  # outcome
+  outcome
 end
 
 # Return all the stats for a player, given a player's name ("name") 
@@ -222,15 +217,18 @@ end
 
 # !!!
 def player_stats(name)
-  output = nil
-  game_hash.each do |home_or_away, team_details|
-    team_details[:players].each do |key, value|
-      if key == name 
-        output = value
-      end
+    new_hash = {}
+    p_stats = nil
+    game_hash.each do |home_or_away, team_details|
+        team_details[:players].each do |one_hash|  # one_hash is an array
+            one_hash.each do |key,value|
+                if value == name
+                    new_hash = one_hash.delete_if { |k,v| v == name }
+                end
+            end
+        end
     end
-  end
-  output
+    new_hash
 end
 
 # Return the number of rebounds for the player with the largest shoe size. 
