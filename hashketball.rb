@@ -2,7 +2,7 @@
 # I was hoping running learn would give me the hash to copy-paste
 # level1 (top) two teams: home and away
 # the test for this is written that is basically tests for every player, so the stats actually have to be correct
-
+require 'pry'
 
 def game_hash
   {
@@ -209,7 +209,6 @@ end
 
 def player_stats(name)
   new_hash = {}
-  p_stats = nil
   game_hash.each do |home_or_away, team_details|
     team_details[:players].each do |one_hash|  # one_hash is an array
       one_hash.each do |key,value| #now it is a hash
@@ -243,7 +242,19 @@ def big_shoe_rebounds
   rebounds
 end
 
+# could use intermediary methods below to answer the test
 
+# def find_player(player_name)
+#  result = nil
+#    game_hash.each do |team_location, team_details|
+#      team_data[:players].select |player_hash}
+#    end
+#  result
+# end
+
+# def all_players
+#  game_hash.values.collect {|team_hash| team_hash[:players] }.flatten
+# end
 
 
 
